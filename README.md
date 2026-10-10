@@ -3,27 +3,42 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![Flask 3.0+](https://img.shields.io/badge/Flask-3.0+-black.svg)](https://palletsprojects.com/p/flask/)
+[![Platform: Windows | Linux | macOS](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-success.svg)](https://www.python.org/)
 [![Database: MySQL | SQLite](https://img.shields.io/badge/Database-MySQL%20%7C%20SQLite3-orange.svg)](database/)
 
-A full-lifecycle laboratory management system designed for university robotics facilities. Built with **Python Flask** and **raw parameterized SQL** (no ORM) for a DBMS Project-Based Learning (PBL) curriculum. Runs out of the box with zero setup using auto-fallback SQLite, or with production MySQL 8.x.
+A full-lifecycle laboratory management system designed for university robotics facilities. Built with **Python Flask** and **raw parameterized SQL** (no ORM) for a DBMS Project-Based Learning (PBL) curriculum. Fully cross-platform compatible with **Linux**, **macOS**, and **Windows**. Runs out of the box with zero configuration using auto-fallback SQLite, or with production MySQL 8.x.
+
+---
+
+## 📑 Reviews & Deliverables
+
+| Document | Description |
+|---|---|
+| 📘 [Project Report (PDF)](25WU0101077_MohdSufiyanNaveed_DBMS_PBL_Report.pdf) | Complete project documentation, ER diagram, and schema design |
+| 📊 [Review 1 Presentation](DBMS_PBL_Presentation_1.pdf) | Problem statement & requirement analysis |
+| 📊 [Review 2 Presentation](ROBO_LAB_PBL_Presentation_2.pptx) | ER diagram, normalization & schema design |
+| 📊 [Review 3 Presentation](ROBO_LAB_PBL_Presentation_3.pptx) | Implementation, queries & results |
 
 ---
 
 ## 🎥 Demonstration Video
 
-<!-- Embed or link your lab walkthrough / presentation recording below -->
+Upload your video recording directly to the [`demonstration/`](demonstration/) directory (named `demonstration.mp4`):
 
-[![Watch Demonstration Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+<video src="demonstration/demonstration.mp4" controls width="100%" poster="mermaid-diagram.png">
+  Your browser does not support the video tag. <a href="demonstration/demonstration.mp4">Click here to view or download demonstration video</a>.
+</video>
 
-> 📹 **Video Demo**: *Click the banner above to watch the end-to-end system walkthrough, role portals, request cart, and slot conflict resolution in action.*  
-> *(To use a local video file instead, replace with: `<video src="demo_video.mp4" controls width="100%"></video>`)*
+> 📹 **Local Video File**: Save your screen recording as [`demonstration/demonstration.mp4`](demonstration/demonstration.mp4).  
+> 🌐 **Online Streaming Link**: Or link your YouTube / Cloud demo here:  
+> [![Watch Demonstration Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
 
 ---
 
 ## ⚡ Core Features
 
 - **Machinery Lifecycle & Timeline**: Real-time status (`Available`, `In Use`, `Maintenance`, `Decommissioned`) with chronological audit history of bookings, breakdowns, and servicing.
-- **Component Request Tray (Cart)**: Single-page floating cart tray in `components.html` allowing students and faculty to request multiple components for their projects in one batch.
+- **Component Request Tray (Cart)**: Single-page floating cart tray in `components.html` allowing students and faculty to request multiple components for their projects in one batch without page hopping.
 - **Slot Mutual Exclusion**: Strict single-user equipment access. The system detects overlapping booking requests, displays `⚠️ Competing Request(s)` badges, and automatically declines competing requests when staff approves one.
 - **Faculty Priority**: Equipment booking queues prioritize faculty requests at the top above student submissions.
 - **Return Verification**: Only Admin & Lab Technicians can process component returns, logging conditions (`Good`, `Damaged`, `Burnt`, `Lost`) to safely update inventory.
@@ -94,29 +109,48 @@ erDiagram
 
 ---
 
-## 🚀 Quick Start Guide
+## 🚀 Cross-Platform Setup Guide (Linux, macOS & Windows)
 
-### 1. Clone & Setup
+RoboLab is fully cross-platform compatible and runs cleanly on **Ubuntu / Debian / Linux**, **macOS (Intel & Apple Silicon)**, and **Windows 10/11**.
+
+### 1. Clone Repository
 ```bash
 git clone https://github.com/MSN-2007/Lab_Management-.git
 cd Lab_Management-
+```
 
-# Create virtual environment
-python -m venv venv
-venv\Scripts\activate       # Windows
-# source venv/bin/activate  # Linux/macOS
+### 2. Environment Setup
 
-# Install dependencies
+#### On Linux / macOS:
+```bash
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 2. Run Application
+#### On Windows (PowerShell / Command Prompt):
+```powershell
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3. Run Application
+
 ```bash
+# Linux / macOS:
+python3 app.py
+
+# Windows:
 python app.py
 ```
 Visit **`http://127.0.0.1:5000`** in your browser.
 
-> 💡 **Zero Setup Required**: The application automatically detects and boots using the pre-seeded `database/robolab.db` SQLite database. To use MySQL 8.x instead, configure your credentials in `.env` (see `.env.example`).
+> 🍎 **macOS Monterey/Ventura/Sonoma Note**: Apple uses port 5000 for AirPlay Receiver by default. You can run on any port (e.g. 5001) seamlessly:
+> ```bash
+> PORT=5001 python3 app.py
+> ```
+> 💡 **Zero Setup Required**: Automatically boots using the pre-seeded `database/robolab.db` SQLite file. To use MySQL 8.x instead, configure your credentials in `.env` (see `.env.example`).
 
 ---
 
@@ -124,11 +158,13 @@ Visit **`http://127.0.0.1:5000`** in your browser.
 
 ```
 SQL_PBL/
-├── app.py              # Flask application routes, views & authorization
+├── app.py              # Cross-platform Flask app routes, views & authorization
 ├── db.py               # Database connector & execution layer (MySQL + SQLite)
-├── config.py           # Configuration & environment variable parser
+├── config.py           # Cross-platform configuration & environment parser
 ├── requirements.txt    # Application dependencies
 ├── mermaid-diagram.png # High-resolution ER diagram
+├── demonstration/      # Dedicated directory for video walkthrough files (.mp4)
+│   └── README.md       # Video format & upload instructions
 ├── database/
 │   ├── schema.sql      # DDL table creation, views & trigger definitions
 │   ├── seed.sql        # Realistic demonstration dataset

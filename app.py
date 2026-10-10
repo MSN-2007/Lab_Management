@@ -1733,8 +1733,11 @@ def procurement_delete(requisition_id):
     return redirect(url_for('procurement_list'))
 
 if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    host = os.environ.get('HOST', '127.0.0.1')
     print("=" * 60)
     print("RoboLab: Robotics Lab Management System Started")
-    print("Server running at: http://127.0.0.1:5000")
+    print(f"Server running at: http://{host}:{port}")
+    print("Cross-platform compatible: Windows | Linux | macOS")
     print("=" * 60)
-    app.run(debug=True, port=5000)
+    app.run(host=host, port=port, debug=True)
