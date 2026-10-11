@@ -1,5 +1,5 @@
 # Demonstration Video Folder
-
+ 
 Place your demonstration recording file in this directory.
 
 ### Supported Formats & Recommended Filenames:
@@ -8,4 +8,7 @@ Place your demonstration recording file in this directory.
 - `demonstration.webm`
 - `demo.webm`
 
-The root [`README.md`](../README.md) is pre-configured to link and embed `demonstration/demonstration.mp4`.
+### Online Presentation:
+- **Streaming Link**: [Watch Video Presentation on OneDrive / SharePoint](https://woxsenschoolofbusiness-my.sharepoint.com/:v:/g/personal/sufiyan_mohd_2029_woxsen_edu_in/IQBvLtEhHFYjQbPFl7azv8nQAfLhHQZBw3Wc2cWNtXp6QbY?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=NKhb7W)
+
+The root [`README.md`](../README.md) is pre-configured with this link.

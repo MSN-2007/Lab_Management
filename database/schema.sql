@@ -36,9 +36,7 @@ CREATE TABLE ROLES (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ------------------------------------------------------------------------------
--- 2. USERS TABLE
--- ------------------------------------------------------------------------------
+
 CREATE TABLE USERS (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     role_id INT NOT NULL,
@@ -52,9 +50,6 @@ CREATE TABLE USERS (
     FOREIGN KEY (role_id) REFERENCES ROLES(role_id) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
--- ------------------------------------------------------------------------------
--- 3. LABORATORIES TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE LABORATORIES (
     lab_id INT AUTO_INCREMENT PRIMARY KEY,
     lab_name VARCHAR(100) NOT NULL UNIQUE,
@@ -64,18 +59,13 @@ CREATE TABLE LABORATORIES (
     FOREIGN KEY (incharge_id) REFERENCES USERS(user_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- ------------------------------------------------------------------------------
--- 4. EQUIPMENT CATEGORIES
--- ------------------------------------------------------------------------------
 CREATE TABLE EQUIPMENT_CATEGORIES (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL UNIQUE,
     description TEXT
 );
 
--- ------------------------------------------------------------------------------
--- 5. EQUIPMENT TABLE
--- ------------------------------------------------------------------------------
+
 CREATE TABLE EQUIPMENT (
     equipment_id VARCHAR(20) PRIMARY KEY,
     equipment_name VARCHAR(120) NOT NULL,
@@ -92,18 +82,12 @@ CREATE TABLE EQUIPMENT (
     FOREIGN KEY (laboratory_id) REFERENCES LABORATORIES(lab_id) ON UPDATE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 6. COMPONENT CATEGORIES
--- ------------------------------------------------------------------------------
 CREATE TABLE COMPONENT_CATEGORIES (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL UNIQUE,
     description TEXT
 );
 
--- ------------------------------------------------------------------------------
--- 7. COMPONENTS TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE COMPONENTS (
     component_id VARCHAR(20) PRIMARY KEY,
     component_name VARCHAR(120) NOT NULL,
@@ -118,9 +102,6 @@ CREATE TABLE COMPONENTS (
     FOREIGN KEY (category_id) REFERENCES COMPONENT_CATEGORIES(category_id) ON UPDATE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 8. PROJECTS TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE PROJECTS (
     project_id INT AUTO_INCREMENT PRIMARY KEY,
     project_name VARCHAR(150) NOT NULL,
@@ -133,9 +114,6 @@ CREATE TABLE PROJECTS (
     FOREIGN KEY (guide_faculty_id) REFERENCES USERS(user_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- ------------------------------------------------------------------------------
--- 9. PROJECT MEMBERS TABLE (Associative Entity)
--- ------------------------------------------------------------------------------
 CREATE TABLE PROJECT_MEMBERS (
     project_id INT NOT NULL,
     user_id INT NOT NULL,
@@ -146,9 +124,6 @@ CREATE TABLE PROJECT_MEMBERS (
     FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 10. BOOKINGS TABLE (Slot Booking for Heavy Equipment)
--- ------------------------------------------------------------------------------
 CREATE TABLE BOOKINGS (
     booking_id INT AUTO_INCREMENT PRIMARY KEY,
     equipment_id VARCHAR(20) NOT NULL,
@@ -167,9 +142,6 @@ CREATE TABLE BOOKINGS (
     FOREIGN KEY (approved_by) REFERENCES USERS(user_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- ------------------------------------------------------------------------------
--- 11. EQUIPMENT ALLOCATION (Component Issuance to Students/Projects)
--- ------------------------------------------------------------------------------
 CREATE TABLE EQUIPMENT_ALLOCATION (
     allocation_id INT AUTO_INCREMENT PRIMARY KEY,
     component_id VARCHAR(20) NOT NULL,
@@ -187,9 +159,6 @@ CREATE TABLE EQUIPMENT_ALLOCATION (
     FOREIGN KEY (project_id) REFERENCES PROJECTS(project_id) ON UPDATE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 12. USAGE LOGS TABLE (Detailed time logs for equipment)
--- ------------------------------------------------------------------------------
 CREATE TABLE USAGE_LOGS (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     equipment_id VARCHAR(20) NOT NULL,
@@ -203,9 +172,6 @@ CREATE TABLE USAGE_LOGS (
     FOREIGN KEY (project_id) REFERENCES PROJECTS(project_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- ------------------------------------------------------------------------------
--- 13. RETURNS TABLE (Record of component returns)
--- ------------------------------------------------------------------------------
 CREATE TABLE RETURNS (
     return_id INT AUTO_INCREMENT PRIMARY KEY,
     allocation_id INT NOT NULL,
@@ -218,9 +184,6 @@ CREATE TABLE RETURNS (
     FOREIGN KEY (verified_by) REFERENCES USERS(user_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- ------------------------------------------------------------------------------
--- 14. VENDORS TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE VENDORS (
     vendor_id INT AUTO_INCREMENT PRIMARY KEY,
     vendor_name VARCHAR(120) NOT NULL,
@@ -232,9 +195,6 @@ CREATE TABLE VENDORS (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ------------------------------------------------------------------------------
--- 15. BREAKDOWNS TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE BREAKDOWNS (
     breakdown_id INT AUTO_INCREMENT PRIMARY KEY,
     equipment_id VARCHAR(20) NOT NULL,
@@ -247,9 +207,6 @@ CREATE TABLE BREAKDOWNS (
     FOREIGN KEY (reported_by) REFERENCES USERS(user_id) ON UPDATE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 16. MAINTENANCE JOBS TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE MAINTENANCE_JOBS (
     job_id INT AUTO_INCREMENT PRIMARY KEY,
     equipment_id VARCHAR(20) NOT NULL,
@@ -266,9 +223,7 @@ CREATE TABLE MAINTENANCE_JOBS (
     FOREIGN KEY (vendor_id) REFERENCES VENDORS(vendor_id) ON UPDATE CASCADE ON DELETE SET NULL
 );
 
--- ------------------------------------------------------------------------------
--- 17. CALIBRATIONS TABLE
--- ------------------------------------------------------------------------------
+
 CREATE TABLE CALIBRATIONS (
     calibration_id INT AUTO_INCREMENT PRIMARY KEY,
     equipment_id VARCHAR(20) NOT NULL,
@@ -280,9 +235,6 @@ CREATE TABLE CALIBRATIONS (
     FOREIGN KEY (equipment_id) REFERENCES EQUIPMENT(equipment_id) ON UPDATE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 18. NOTIFICATIONS TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE NOTIFICATIONS (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -293,9 +245,6 @@ CREATE TABLE NOTIFICATIONS (
     FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- ------------------------------------------------------------------------------
--- 19. REQUISITIONS & MODULE PROCUREMENT TABLE
--- ------------------------------------------------------------------------------
 CREATE TABLE REQUISITIONS (
     requisition_id INT AUTO_INCREMENT PRIMARY KEY,
     component_id VARCHAR(20),
